@@ -64,7 +64,7 @@ let lowercase = msg.content.toLowerCase()
 //futher commands
   
   
-
+//ttttt
 
 });
 
