@@ -36,7 +36,8 @@ let lowercase = msg.content.toLowerCase()
     const helpembed = new Discord.RichEmbed()
    .setTitle("Bot Usage")
    .setColor(`#0A102A`)
-   .addField(".ping", "Sends bot's latency", false);
+   .addField(".ping", "Sends bot's latency", false)
+   .addField(".github", "Provides source code for bot",false);
     msg.channel.send(helpembed)
     }
   
@@ -50,6 +51,16 @@ let lowercase = msg.content.toLowerCase()
     msg.channel.send(pingembed)
     }
 
+//github  
+    if (lowercase.startsWith(".github")) {
+    const githubembed = new Discord.RichEmbed()
+   .setTitle("Github Source")
+   .setColor(`#FFCD43`)
+   .setDescription("https://github.com/ZacBytes/MR_Core")
+   .setTimestamp();
+    msg.channel.send(githubembed)
+    }  
+  
 //futher commands
   
   
