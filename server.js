@@ -74,7 +74,7 @@ let lowercase = msg.content.toLowerCase()
    .setTitle("Element 2 Manual")
    .setColor(`#FFCD43`)
    .setDescription("https://www.etcconnect.com/WorkArea/DownloadAsset.aspx?id=10737497091")
-   .setFooter("Element 2 is the lighting board used in Audi 2")
+   .setFooter("Element 2 is the lighting board used in CPA 2")
    .setTimestamp();
     msg.channel.send(githubembed)
     }  
