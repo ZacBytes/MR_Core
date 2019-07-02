@@ -26,6 +26,11 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
+//Member Join______________________________________________________________________________
+client.on('guildMemberAdd', member => {
+    member.send("Welcome to the official MR Discord! Please change your server nickname to your real name and we will grant you access to the server momentarily."); 
+});
+
 //Commands_________________________________________________________________________________
 client.on('message', msg => {
 if (msg.author.bot) return;
@@ -50,7 +55,8 @@ let lowercase = msg.content.toLowerCase()
    .setTimestamp();
     msg.channel.send(pingembed)
     }
-
+                                                                            
+    
 //github  
     if (lowercase.startsWith(".github")) {
     const githubembed = new Discord.RichEmbed()
@@ -59,12 +65,17 @@ let lowercase = msg.content.toLowerCase()
    .setDescription("https://github.com/ZacBytes/MR_Core")
    .setTimestamp();
     msg.channel.send(githubembed)
-    }  
+    }
   
 //futher commands
   
   
 
+  
+//fun commands
+    if (lowercase.includes("egg")) {
+    msg.react("🥚");
+    }
 
 });
 
