@@ -77,7 +77,7 @@ let lowercase = msg.content.toLowerCase()
     msg.react("🥚");
     }
   
-    if (lowercase.includes("mr ") || lowercase.includes(" mr")) {
+    if (lowercase.includes("mr ") || lowercase.includes(" mr") || lowercase.includes("gold class cca")) {
     msg.react(client.emojis.get("595106822034030592"));
     }
 
