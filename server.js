@@ -42,7 +42,8 @@ let lowercase = msg.content.toLowerCase()
    .setTitle("Bot Usage")
    .setColor(`#0A102A`)
    .addField(".ping", "Sends bot's latency", false)
-   .addField(".github", "Provides source code for bot",false);
+   .addField(".github", "Provides source code for bot",false)
+   .addField(".manual {name}", "Equipment manuals. Names: E2",false);
     msg.channel.send(helpembed)
     }
   
@@ -66,6 +67,19 @@ let lowercase = msg.content.toLowerCase()
    .setTimestamp();
     msg.channel.send(githubembed)
     }
+  
+//manuals
+    if (lowercase.startsWith(".manual e2")) {
+    const githubembed = new Discord.RichEmbed()
+   .setTitle("Element 2 Manual")
+   .setColor(`#FFCD43`)
+   .setDescription("https://www.etcconnect.com/WorkArea/DownloadAsset.aspx?id=10737497091")
+   .setFooter("Element 2 is the lighting board used in Audi 2")
+   .setTimestamp();
+    msg.channel.send(githubembed)
+    }  
+  
+  
   
 //futher commands
   
