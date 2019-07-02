@@ -76,6 +76,10 @@ let lowercase = msg.content.toLowerCase()
     if (lowercase.includes("egg")) {
     msg.react("🥚");
     }
+  
+    if (lowercase.includes("mr ") || lowercase.includes(" mr")) {
+    msg.react(client.emojis.get("595106822034030592"));
+    }
 
 });
 
