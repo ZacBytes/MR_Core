@@ -43,7 +43,7 @@ let lowercase = msg.content.toLowerCase()
    .setColor(`#0A102A`)
    .addField(".ping", "Sends bot's latency", false)
    .addField(".github", "Provides source code for bot",false)
-   .addField(".manual {name}", "Equipment manuals. Names: E2",false);
+   .addField(".manual {name}", "Equipment manuals. Names: E2,CS,M7CL,JESTER",false);
     msg.channel.send(helpembed)
     }
   
@@ -70,16 +70,44 @@ let lowercase = msg.content.toLowerCase()
   
 //manuals
     if (lowercase.startsWith(".manual e2")) {
-    const githubembed = new Discord.RichEmbed()
+    const e2embed = new Discord.RichEmbed()
    .setTitle("Element 2 Manual")
    .setColor(`#FFCD43`)
    .setDescription("https://www.etcconnect.com/WorkArea/DownloadAsset.aspx?id=10737497091")
    .setFooter("Element 2 is the lighting board used in CPA 2")
    .setTimestamp();
-    msg.channel.send(githubembed)
+    msg.channel.send(e2embed)
     }  
   
+    if (lowercase.startsWith(".manual cs")) {
+    const csembed = new Discord.RichEmbed()
+   .setTitle("ColorSource Manual")
+   .setColor(`#FFCD43`)
+   .setDescription("https://www.etcconnect.com/WorkArea/DownloadAsset.aspx?id=10737498609")
+   .setFooter("ColorSource is the lighting board used in Audi 2")
+   .setTimestamp();
+    msg.channel.send(csembed)
+    }  
   
+    if (lowercase.startsWith(".manual jester")) {
+    const jesterembed = new Discord.RichEmbed()
+   .setTitle("Jester Manual")
+   .setColor(`#FFCD43`)
+   .setDescription("https://zero88.com/manuals/7340300_jestermanual_3_4.pdf")
+   .setFooter("Jester is the lighting board used in CPA 1")
+   .setTimestamp();
+    msg.channel.send(jesterembed)
+    } 
+  
+    if (lowercase.startsWith(".manual m7cl")) {
+    const m7clembed = new Discord.RichEmbed()
+   .setTitle("Yamaha M7CL Manual")
+   .setColor(`#FFCD43`)
+   .setDescription("https://sg.yamaha.com/files/download/other_assets/7/323187/m7clv3_en_om_i0.pdf")
+   .setFooter("Yamaha M7CL is the sound board used in Audi 2 & CPA 2")
+   .setTimestamp();
+    msg.channel.send(m7clembed)
+    }    
   
 //futher commands
   
