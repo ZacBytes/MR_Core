@@ -43,7 +43,7 @@ let lowercase = msg.content.toLowerCase()
    .setColor(`#0A102A`)
    .addField(".ping", "Sends bot's latency", false)
    .addField(".github", "Provides source code for bot",false)
-   .addField(".manual {name}", "Equipment manuals. Names: E2,CS,M7CL,JESTER",false);
+   .addField(".manual {name}", "Equipment manuals. Names: **E2, CS, M7CL, JESTER**",false);
     msg.channel.send(helpembed)
     }
   
