@@ -19,6 +19,12 @@ const client = new Discord.Client();
 const activities = ["with mixer","with lights","with mics","with condensers"];
 const owner = client.users.find(user => user.username == "ZacBytes")
 
+const wrongchannelembed = new Discord.RichEmbed()
+.setTitle("Error")
+.setColor(`#EF5858`)
+.setDescription("Use <#594741385521790986> for bot commands!")
+.setTimestamp();
+
 //Start Up_________________________________________________________________________________
 client.on('ready', () => {
   var chosenactivity = activities[Math.floor(Math.random()*activities.length)];
@@ -38,17 +44,20 @@ let lowercase = msg.content.toLowerCase()
 
 //help  
     if (lowercase.startsWith(".help")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
     const helpembed = new Discord.RichEmbed()
    .setTitle("Bot Usage")
    .setColor(`#0A102A`)
    .addField(".ping", "Sends bot's latency", false)
    .addField(".github", "Provides source code for bot",false)
+   .addField(".announce {channelid} {text}", "Posts announcement text to the channelid specified",false) 
    .addField(".manual {name}", "Equipment manuals. Names: **E2, CS, M7CL, JESTER**",false);
     msg.channel.send(helpembed)
     }
   
 //ping  
     if (lowercase.startsWith(".ping")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
     const pingembed = new Discord.RichEmbed()
    .setTitle("Ping")
    .setColor(`#FFCD43`)
@@ -60,6 +69,7 @@ let lowercase = msg.content.toLowerCase()
     
 //github  
     if (lowercase.startsWith(".github")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
     const githubembed = new Discord.RichEmbed()
    .setTitle("Github Source")
    .setColor(`#FFCD43`)
@@ -68,8 +78,29 @@ let lowercase = msg.content.toLowerCase()
     msg.channel.send(githubembed)
     }
   
+//announce  
+    if (lowercase.startsWith(".announce")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
+    const args = msg.content.slice(9).trim().split(/ +/g)
+    var chnlid = args[0].slice(2).replace(">","").trim()
+    if (!chnlid || !msg.member.hasPermission('ADMINISTRATOR')) return;
+    console.log(chnlid)
+    var annchannel = client.channels.get(chnlid);
+    var text = msg.content.slice(10 + chnlid.length + 3)
+    var newtext1 = text.replace("<everyone>","@everyone")
+    var newtext2 = newtext1.replace("<here>","@here")
+    const announcementembed = new Discord.RichEmbed()
+   .setTitle("Announcement")
+   .setAuthor(msg.guild.members.get(msg.author.id).displayName, msg.author.avatarURL)
+   .setColor(`#4B8BF4`)
+   .setDescription(newtext2)
+   .setTimestamp();
+    annchannel.send(announcementembed)
+    }
+  
 //manuals
     if (lowercase.startsWith(".manual e2")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
     const e2embed = new Discord.RichEmbed()
    .setTitle("Element 2 Manual")
    .setColor(`#FFCD43`)
@@ -80,6 +111,7 @@ let lowercase = msg.content.toLowerCase()
     }  
   
     if (lowercase.startsWith(".manual cs")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
     const csembed = new Discord.RichEmbed()
    .setTitle("ColorSource Manual")
    .setColor(`#FFCD43`)
@@ -90,6 +122,7 @@ let lowercase = msg.content.toLowerCase()
     }  
   
     if (lowercase.startsWith(".manual jester")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
     const jesterembed = new Discord.RichEmbed()
    .setTitle("Jester Manual")
    .setColor(`#FFCD43`)
@@ -100,6 +133,7 @@ let lowercase = msg.content.toLowerCase()
     } 
   
     if (lowercase.startsWith(".manual m7cl")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
     const m7clembed = new Discord.RichEmbed()
    .setTitle("Yamaha M7CL Manual")
    .setColor(`#FFCD43`)

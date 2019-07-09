@@ -5,7 +5,8 @@
   },
   "version": "1.0.0",
   "dependencies": {
-    "discord.js": "^11.4.2",
-    "express": "^4.16.4"
+    "discord.js": "^11.5.1",
+    "express": "^4.16.4",
+    "sg-hazometer": "^1.0.1"
   }
 }
