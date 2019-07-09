@@ -35,6 +35,12 @@ client.on('ready', () => {
 //Member Join______________________________________________________________________________
 client.on('guildMemberAdd', member => {
     member.send("Welcome to the official MR Discord! Please change your server nickname to your real name and we will grant you access to the server momentarily."); 
+    var general = client.channels.get("594164045452541952")
+    const joinembed = new Discord.RichEmbed()
+   .setTitle(`${member.displayName} has joined the server!`)
+   .setColor(`#FFCD42`)
+   .setTimestamp();
+    general.send(joinembed)
 });
 
 //Commands_________________________________________________________________________________
