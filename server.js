@@ -50,7 +50,7 @@ let lowercase = msg.content.toLowerCase()
    .setColor(`#0A102A`)
    .addField(".ping", "Sends bot's latency", false)
    .addField(".github", "Provides source code for bot",false)
-   .addField(".announce {channelid} {text}", "Posts announcement text to the channelid specified",false) 
+   .addField(".announce {#channel} {text}", "Posts announcement text to the channel mentioned. Use **<everyone>** or **<here>** to convert",false) 
    .addField(".manual {name}", "Equipment manuals. Names: **E2, CS, M7CL, JESTER**",false);
     msg.channel.send(helpembed)
     }
