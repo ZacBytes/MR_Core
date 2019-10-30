@@ -15,6 +15,8 @@ setInterval(() => {
 //Variables________________________________________________________________________________
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const nric = require('nric');
+const request = require('request');
 
 const activities = ["with mixer","with lights","with mics","with condensers"];
 const owner = client.users.find(user => user.username == "ZacBytes")
@@ -57,7 +59,9 @@ let lowercase = msg.content.toLowerCase()
    .addField(".ping", "Sends bot's latency", false)
    .addField(".github", "Provides source code for bot",false)
    .addField(".announce {#channel} {text}", "Posts announcement text to the channel mentioned. Use **<everyone>** or **<here>** to convert",false) 
-   .addField(".manual {name}", "Equipment manuals. Names: **E2, CS, M7CL, JESTER**",false);
+   .addField(".manual {name}", "Equipment manuals. Names: **E2, CS, M7CL, JESTER**",false)
+   .addField(".nric {generate/validate}", "Generates/Validates an NRIC no.",false)
+   .addField(".haze", "Provides current PSI from NEA",false);
     msg.channel.send(helpembed)
     }
   
@@ -83,6 +87,64 @@ let lowercase = msg.content.toLowerCase()
    .setTimestamp();
     msg.channel.send(githubembed)
     }
+  
+//nric generate  
+    if (lowercase.startsWith(".nric generate")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
+    const nricembed = new Discord.RichEmbed()
+   .setTitle("NRIC Generated")
+   .setColor(`#4B8BF4`)
+   .setDescription(nric.generateNRIC())
+   .setTimestamp();
+    msg.channel.send(nricembed)
+    }
+  
+//nric validate
+    if (lowercase.startsWith(".nric validate")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
+    var number = msg.content.slice(14).trim()
+        console.log(number)
+    const nricembed = new Discord.RichEmbed()
+   .setTitle("NRIC Validation")
+   .setColor(`#4B8BF4`)
+   .setDescription(nric.validate(number))
+   .setTimestamp();
+    msg.channel.send(nricembed)
+    }
+  
+//haze  
+    if (lowercase.startsWith(".haze")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
+      
+  request(`https://api.data.gov.sg/v1/environment/psi`, { json: true }, (err, res, body) => {
+    if (err) { return console.log(err); }
+    if (!body) {return console.log("Error, not found");}
+    let psi_table = body["items"][0]["readings"]["psi_twenty_four_hourly"]
+    let status = body["api_info"]["status"]
+    
+    let national = psi_table["national"]
+    let north = psi_table["north"]
+    let east = psi_table["east"]
+    let south = psi_table["south"]
+    let west = psi_table["west"]
+    let central = psi_table["central"]
+    
+    const hazeembed = new Discord.RichEmbed()
+   .setTitle("Singapore PSI 24-Hourly")
+   .setColor(`#4B8BF4`)
+   .setDescription(`Overall Status: **${status}**`)
+   .addField("\n National", national,true)
+   .addField("\n North", north,true)
+   .addField("\n East", east,true)
+   .addField("\n South", south,true)
+   .addField("\n West", west,true)
+    .addField("\n Central", central,true)
+   .setFooter("Real-time data from NEA API")
+   .setTimestamp();
+    msg.channel.send(hazeembed)
+  });
+    }
+  
   
 //announce  
     if (lowercase.startsWith(".announce")) {
