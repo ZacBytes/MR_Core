@@ -816,4 +816,4 @@ specifiers:
   nric: ^1.1.3
   request: ^2.88.0
   sg-hazometer: ^1.0.1
-  uglify-js: '>=2.6.0'
+  uglify-js: ^3.6.5

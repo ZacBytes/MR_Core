@@ -61,7 +61,8 @@ let lowercase = msg.content.toLowerCase()
    .addField(".announce {#channel} {text}", "Posts announcement text to the channel mentioned. Use **<everyone>** or **<here>** to convert",false) 
    .addField(".manual {name}", "Equipment manuals. Names: **E2, CS, M7CL, JESTER**",false)
    .addField(".nric {generate/validate}", "Generates/Validates an NRIC no.",false)
-   .addField(".haze", "Provides current PSI from NEA",false);
+   .addField(".haze", "Provides current PSI from NEA",false)
+   .addField(".eval", "Evaluate command input, restricted command",false);
     msg.channel.send(helpembed)
     }
   
@@ -76,7 +77,7 @@ let lowercase = msg.content.toLowerCase()
     msg.channel.send(pingembed)
     }
                                                                             
-    
+
 //github  
     if (lowercase.startsWith(".github")) {
     if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
@@ -145,6 +146,37 @@ let lowercase = msg.content.toLowerCase()
   });
     }
   
+//eval
+function clean(text) {
+  if (typeof text === "string")
+    return text
+      .replace(/`/g, "`" + String.fromCharCode(8203))
+      .replace(/@/g, "@" + String.fromCharCode(8203));
+  else return text;
+}
+
+const aclean = text => {
+  if (typeof text === "string")
+    return text
+      .replace(/`/g, "`" + String.fromCharCode(8203))
+      .replace(/@/g, "@" + String.fromCharCode(8203));
+  else return text;
+};
+
+if (msg.content.startsWith(".eval")) {
+  if (msg.author.id !== config.ownerID) return;
+  let args = msg.content.split(" ").slice(1);
+  try {
+    const code = args.join(" ");
+    let evaled = eval(code);
+
+    if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
+
+    msg.channel.send(aclean(evaled), { code: "xl" });
+  } catch (err) {
+    msg.channel.send(`\`ERROR\` \`\`\`xl\n${aclean(err)}\n\`\`\``);
+  }
+}
   
 //announce  
     if (lowercase.startsWith(".announce")) {
