@@ -5,6 +5,7 @@
   },
   "version": "1.0.0",
   "dependencies": {
+    "uglify-js": "^3.6.5",
     "discord.js": "^11.5.1",
     "express": "^4.16.4",
     "sg-hazometer": "^1.0.1",
