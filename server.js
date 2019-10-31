@@ -62,6 +62,7 @@ let lowercase = msg.content.toLowerCase()
    .addField(".manual {name}", "Equipment manuals. Names: **E2, CS, M7CL, JESTER**",false)
    .addField(".nric {generate/validate}", "Generates/Validates an NRIC no.",false)
    .addField(".haze", "Provides current PSI from NEA",false)
+   .addField(".uvi", "Provides current ultra-violet index data",false)
    .addField(".eval", "Evaluate command input, restricted command",false);
     msg.channel.send(helpembed)
     }
@@ -143,6 +144,27 @@ let lowercase = msg.content.toLowerCase()
    .setFooter("Real-time data from NEA API")
    .setTimestamp();
     msg.channel.send(hazeembed)
+  });
+    }
+  
+//uvi  
+    if (lowercase.startsWith(".uvi")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
+      
+  request(`https://api.data.gov.sg/v1/environment/uv-index`, { json: true }, (err, res, body) => {
+    if (err) { return console.log(err); }
+    if (!body) {return console.log("Error, not found");}
+    let uvi = body["items"][0]["index"][0]["value"]
+    let status = body["api_info"]["status"]
+    
+    const uviembed = new Discord.RichEmbed()
+   .setTitle("Singapore UV Index")
+   .setColor(`#1ED760`)
+   .setDescription(`Overall Status: **${status}**`)
+   .addField("\n National", uvi,true)
+   .setFooter("Hourly data from NEA API")
+   .setTimestamp();
+    msg.channel.send(uviembed)
   });
     }
   
@@ -250,14 +272,14 @@ if (msg.content.startsWith(".eval")) {
   
 //fun commands
     if (lowercase.includes("egg")) {
-    msg.react("🥚");
+      msg.react("🥚");
     }
   
     if (lowercase.includes("mr ") || lowercase.includes(" mr") || lowercase.includes("gold class cca")) {
-    msg.react(client.emojis.get("595106822034030592"));
+      msg.react(client.emojis.get("595106822034030592"));
     }
 
 });
-
+  
 //Login____________________________________________________________________________________
 client.login(config.token);
