@@ -63,6 +63,7 @@ let lowercase = msg.content.toLowerCase()
    .addField(".nric {generate/validate}", "Generates/Validates an NRIC no.",false)
    .addField(".haze", "Provides current PSI from NEA",false)
    .addField(".uvi", "Provides current ultra-violet index data",false)
+   .addField(".url validate {url}", "Checks URL validity",false)
    .addField(".eval", "Evaluate command input, restricted command",false);
     msg.channel.send(helpembed)
     }
@@ -105,7 +106,7 @@ let lowercase = msg.content.toLowerCase()
     if (lowercase.startsWith(".nric validate")) {
     if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
     var number = msg.content.slice(14).trim()
-        console.log(number)
+    
     const nricembed = new Discord.RichEmbed()
    .setTitle("NRIC Validation")
    .setColor(`#4B8BF4`)
@@ -134,7 +135,7 @@ let lowercase = msg.content.toLowerCase()
     const hazeembed = new Discord.RichEmbed()
    .setTitle("Singapore PSI 24-Hourly")
    .setColor(`#4B8BF4`)
-   .setDescription(`Overall Status: **${status}**`)
+   .setDescription(`API Status: **${status}**`)
    .addField("\n National", national,true)
    .addField("\n North", north,true)
    .addField("\n East", east,true)
@@ -160,7 +161,7 @@ let lowercase = msg.content.toLowerCase()
     const uviembed = new Discord.RichEmbed()
    .setTitle("Singapore UV Index")
    .setColor(`#1ED760`)
-   .setDescription(`Overall Status: **${status}**`)
+   .setDescription(`API Status: **${status}**`)
    .addField("\n National", uvi,true)
    .setFooter("Hourly data from NEA API")
    .setTimestamp();
@@ -273,6 +274,10 @@ if (msg.content.startsWith(".eval")) {
 //fun commands
     if (lowercase.includes("egg")) {
       msg.react("🥚");
+    }
+  
+    if (lowercase.includes("lol")) {
+      msg.react(client.emojis.get("598144351029166080"));
     }
   
     if (lowercase.includes("mr ") || lowercase.includes(" mr") || lowercase.includes("gold class cca")) {
