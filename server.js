@@ -64,7 +64,6 @@ let lowercase = msg.content.toLowerCase()
    .addField(".haze", "Provides current PSI from NEA",false)
    .addField(".uvi", "Provides current ultra-violet index data",false)
    .addField(".url validate {url}", "Checks URL validity",false)
-   .addField(".gst {price}", "Calculates GST payable, price is the price excluding GST. e.g **2.10**",false)
    .addField(".eval", "Evaluate command input, restricted command",false);
     msg.channel.send(helpembed)
     }
@@ -114,24 +113,6 @@ let lowercase = msg.content.toLowerCase()
    .setDescription(nric.validate(number))
    .setTimestamp();
     msg.channel.send(nricembed)
-    }
-  
-//gst
-    if (lowercase.startsWith(".gst")) {
-    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
-    var priceexcluding = parseInt((msg.content.slice(4).trim()),10)
-    if (!priceexcluding) return msg.channel.send("Error: Invalid Price");
-    var gstpayable = (priceexcluding/100) * 7
-    var priceincluding = priceexcluding + gstpayable
-    
-    const gstembed = new Discord.RichEmbed()
-   .setTitle("GST Calculator")
-   .setColor(`#4D8CF4`)
-   .addField("Before GST", `SGD ${priceexcluding}`,false)
-   .addField("GST Payable (7%)", `SGD ${gstpayable}`,false)
-   .addField("Net Price", `SGD ${priceincluding}`,false)
-   .setTimestamp();
-    msg.channel.send(gstembed)
     }
   
 //haze  
