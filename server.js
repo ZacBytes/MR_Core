@@ -123,7 +123,7 @@ let lowercase = msg.content.toLowerCase()
     if (err) { return console.log(err); }
     if (!body) {return console.log("Error, not found");}
     let psi_table = body["items"][0]["readings"]["psi_twenty_four_hourly"]
-    let status = body["api_info"]["status"]
+    let status = "Error"
     
     let national = psi_table["national"]
     let north = psi_table["north"]
@@ -132,10 +132,22 @@ let lowercase = msg.content.toLowerCase()
     let west = psi_table["west"]
     let central = psi_table["central"]
     
+    if (national <= 50) {
+      status = "Normal";
+    } else if (national >= 50 & national <= 100 ){
+      status = "Moderate";
+    } else if (national >= 101 & national <= 200 ){
+      status = "Unhealthy";
+    } else if (national >= 201 & national <= 300 ){
+      status = "Very Unhealthy";
+    } else if (national > 300){
+      status = "Hazardous";
+    }
+    
     const hazeembed = new Discord.RichEmbed()
    .setTitle("Singapore PSI 24-Hourly")
    .setColor(`#4B8BF4`)
-   .setDescription(`API Status: **${status}**`)
+   .setDescription(`Status: **${status}**`)
    .addField("\n National", national,true)
    .addField("\n North", north,true)
    .addField("\n East", east,true)
