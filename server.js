@@ -60,6 +60,7 @@ let lowercase = msg.content.toLowerCase()
    .addField(".github", "Provides source code for bot",false)
    .addField(".announce {#channel} {text}", "Posts announcement text to the channel mentioned. Use **<everyone>** or **<here>** to convert",false) 
    .addField(".manual {name}", "Equipment manuals. Names: **E2, CS, M7CL, JESTER**",false)
+   .addField(".coinflip", "Flips a coin for you",false)
    .addField(".nric {generate/validate}", "Generates/Validates an NRIC no.",false)
    .addField(".haze", "Provides current PSI from NEA",false)
    .addField(".uvi", "Provides current ultra-violet index data",false)
@@ -147,7 +148,7 @@ let lowercase = msg.content.toLowerCase()
     const hazeembed = new Discord.RichEmbed()
    .setTitle("Singapore PSI 24-Hourly")
    .setColor(`#4B8BF4`)
-   .setDescription(`Status: **${status}**`)
+   .setDescription(`Air Quality: **${status}**`)
    .addField("\n National", national,true)
    .addField("\n North", north,true)
    .addField("\n East", east,true)
@@ -180,6 +181,21 @@ let lowercase = msg.content.toLowerCase()
     msg.channel.send(uviembed)
   });
     }
+  
+//coinflip
+    if (lowercase.startsWith(".coinflip")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
+    function coinFlip() {
+      return (Math.floor(Math.random() * 2) == 0) ? 'Heads' : 'Tails';
+    }
+    
+    const coinembed = new Discord.RichEmbed()
+   .setTitle("Coin Flip")
+   .setColor(`#79E6D9`)
+   .setDescription(`Landed **${coinFlip()}**!`);
+    msg.channel.send(coinembed)
+    } 
+
   
 //eval
 function clean(text) {
