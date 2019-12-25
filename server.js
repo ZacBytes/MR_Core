@@ -17,6 +17,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const nric = require('nric');
 const request = require('request');
+const sghaze = require('sg-haze');
 
 const activities = ["with mixer","with lights","with mics","with condensers"];
 const owner = client.users.find(user => user.username == "ZacBytes")
@@ -120,41 +121,18 @@ let lowercase = msg.content.toLowerCase()
     if (lowercase.startsWith(".haze")) {
     if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
       
-  request(`https://api.data.gov.sg/v1/environment/psi`, { json: true }, (err, res, body) => {
-    if (err) { return console.log(err); }
-    if (!body) {return console.log("Error, not found");}
-    let psi_table = body["items"][0]["readings"]["psi_twenty_four_hourly"]
-    let status = "Error"
-    
-    let national = psi_table["national"]
-    let north = psi_table["north"]
-    let east = psi_table["east"]
-    let south = psi_table["south"]
-    let west = psi_table["west"]
-    let central = psi_table["central"]
-    
-    if (national <= 50) {
-      status = "Normal";
-    } else if (national >= 50 & national <= 100 ){
-      status = "Moderate";
-    } else if (national >= 101 & national <= 200 ){
-      status = "Unhealthy";
-    } else if (national >= 201 & national <= 300 ){
-      status = "Very Unhealthy";
-    } else if (national > 300){
-      status = "Hazardous";
-    }
+    sghaze.getPSI(function(err, PSIData){
     
     const hazeembed = new Discord.RichEmbed()
    .setTitle("Singapore PSI 24-Hourly")
    .setColor(`#4B8BF4`)
-   .setDescription(`Air Quality: **${status}**`)
-   .addField("\n National", national,true)
-   .addField("\n North", north,true)
-   .addField("\n East", east,true)
-   .addField("\n South", south,true)
-   .addField("\n West", west,true)
-    .addField("\n Central", central,true)
+   .setDescription(`Air Quality: **${PSIData.HealthStatus}**`)
+   .addField("\n National", PSIData.NationalPSI,true)
+   .addField("\n North", PSIData.NorthPSI,true)
+   .addField("\n East", PSIData.EastPSI,true)
+   .addField("\n South", PSIData.SouthPSI,true)
+   .addField("\n West", PSIData.WestPSI,true)
+    .addField("\n Central", PSIData.CentralPSI,true)
    .setFooter("Real-time data from NEA API")
    .setTimestamp();
     msg.channel.send(hazeembed)

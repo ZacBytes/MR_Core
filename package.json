@@ -10,6 +10,8 @@
     "express": "^4.17.1",
     "sg-hazometer": "^1.0.1",
     "nric": "^1.1.7",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "st-scraper": "^1.2.7",
+    "sg-haze": "^1.0.5"
   }
 }
