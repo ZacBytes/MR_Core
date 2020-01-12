@@ -18,6 +18,8 @@ const client = new Discord.Client();
 const nric = require('nric');
 const request = require('request');
 const sghaze = require('sg-haze');
+const stscrape = require('st-scraper');
+const cnascraper = require('cna-scraper');
 
 const activities = ["with mixer","with lights","with mics","with condensers"];
 const owner = client.users.find(user => user.username == "ZacBytes")
@@ -66,6 +68,8 @@ let lowercase = msg.content.toLowerCase()
    .addField(".haze", "Provides current PSI from NEA",false)
    .addField(".uvi", "Provides current ultra-violet index data",false)
    .addField(".url validate {url}", "Checks URL validity",false)
+   .addField(".st-scrape ${straits times article url}", "Scrapes the article",false)
+   .addField(".cna-scrape ${channl news asia article url}", "Scrapes the article",false)
    .addField(".eval", "Evaluate command input, restricted command",false);
     msg.channel.send(helpembed)
     }
@@ -115,6 +119,40 @@ let lowercase = msg.content.toLowerCase()
    .setDescription(nric.validate(number))
    .setTimestamp();
     msg.channel.send(nricembed)
+    }
+  
+//st-scrape
+    if (lowercase.startsWith(".st-scrape")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
+    var url = msg.content.slice(10).trim()
+    
+    stscrape.ScrapeArticle(url, function(err, ArticleData){
+      const articleembed = new Discord.RichEmbed()
+     .setTitle(ArticleData.title)
+     .addField(`**Img Caption**: ${ArticleData.imgcaption.substring(0,230)}`)
+     .setDescription(`**Text Preview**: ${ArticleData.text.substring(0,230)}`)
+     .setImage(ArticleData.img)
+     .setColor(`#4B8BF4`)
+     .setFooter(ArticleData.postdate);
+      msg.channel.send(articleembed)
+    });
+    }
+  
+//cna-scrape
+    if (lowercase.startsWith(".cna-scrape")) {
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
+    var url = msg.content.slice(12).trim()
+    
+    cnascraper.ScrapeArticle(url, function(err, ArticleData){
+      const articleembed = new Discord.RichEmbed()
+     .setTitle(ArticleData.title)
+     .addField(`**Img Caption**: ${ArticleData.imgcaption.substring(0,230)}`)
+     .setDescription(`**Text Preview**: ${ArticleData.text.substring(0,230)}`)
+     .setImage(ArticleData.img["url"])
+     .setColor(`#4B8BF4`)
+     .setFooter(ArticleData.postdate);
+      msg.channel.send(articleembed)
+    });
     }
   
 //haze  

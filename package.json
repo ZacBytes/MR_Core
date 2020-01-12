@@ -5,13 +5,14 @@
   },
   "version": "1.0.1",
   "dependencies": {
-    "uglify-js": "^3.7.2",
+    "uglify-js": "^3.7.4",
     "discord.js": "^11.5.1",
     "express": "^4.17.1",
     "sg-hazometer": "^1.0.1",
-    "nric": "^1.1.7",
+    "nric": "^1.1.9",
     "request": "^2.88.0",
-    "st-scraper": "^1.2.7",
-    "sg-haze": "^1.0.5"
+    "st-scraper": "^1.3.0",
+    "sg-haze": "^1.0.6",
+    "cna-scraper": "^1.0.2"
   }
 }

@@ -1,12 +1,13 @@
 dependencies:
+  cna-scraper: 1.0.2
   discord.js: 11.5.1
   express: 4.17.1
-  nric: 1.1.8
+  nric: 1.1.9
   request: 2.88.0
-  sg-haze: 1.0.5
+  sg-haze: 1.0.6
   sg-hazometer: 1.0.1
-  st-scraper: 1.2.7
-  uglify-js: 3.7.2
+  st-scraper: 1.3.0
+  uglify-js: 3.7.4
 packages:
   /accepts/1.3.7:
     dependencies:
@@ -122,6 +123,15 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha1-qbqoYKP5tZWmuBsahocxIe06Jp4=
+  /cna-scraper/1.0.2:
+    dependencies:
+      cheerio: 0.22.0
+      request: 2.88.0
+      srcset: 2.0.1
+      valid-url: 1.0.9
+    dev: false
+    resolution:
+      integrity: sha512-0QyF7paJ1HzglHhS11kBb9lz8f4DPxUieiFrnIDnrVyKqLw8imNHfI37ap3vnYFih9l7ZonP3bFUzFvnkCDmjw==
   /combined-stream/1.0.8:
     dependencies:
       delayed-stream: 1.0.0
@@ -655,10 +665,10 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
-  /nric/1.1.8:
+  /nric/1.1.9:
     dev: false
     resolution:
-      integrity: sha512-y450C+SBUBS52VCTPvqbtvSQq2RTgYASLqNr4DKAabmcbF4ob4ktKj0WDLvQFoD1/PgFQyd/z2GrPaGcSwTb+w==
+      integrity: sha512-JXM89kpg0Hu9T+G2P/UGAmPSafmDwUreuBm4+53yBDBuEuOCJa//UMqWDujHoovXI5BMg+TUN3o5zhv75WEatQ==
   /nth-check/1.0.2:
     dependencies:
       boolbase: 1.0.0
@@ -846,12 +856,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-JvdAWfbXeIGaZ9cILp38HntZSFSo3mWg6xGcJJsd+d4aRMOqauag1C63dJfDw7OaMYwEbHMOxEZ1lqVRYP2OAw==
-  /sg-haze/1.0.5:
+  /sg-haze/1.0.6:
     dependencies:
       request: 2.88.0
     dev: false
     resolution:
-      integrity: sha512-8hddc2MBaTXR4ZBnm0mqv1p3GcTGxm/PIhTSAi66Gj/gTO++s1DBG1cCdVF8pMWiLwLzskTK1mVqu6DGepHXHg==
+      integrity: sha512-cGNU5WjBwIJB2K44ncsUjvP2NzmroHL6R9ra39VYjIhtm0F0wxBBuPTlSmtkwLIeh4lYUTaOurEIcSmQrz/wTw==
   /sg-hazometer/1.0.1:
     dependencies:
       requests: 0.1.7
@@ -869,6 +879,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
+  /srcset/2.0.1:
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-00kZI87TdRKwt+P8jj8UZxbfp7mK2ufxcIMWvhAOZNJTRROimpHeruWrGvCZneiuVDLqdyHefVp748ECTnyUBQ==
   /sshpk/1.16.1:
     dependencies:
       asn1: 0.2.4
@@ -886,14 +902,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-HXXqVUq7+pcKeLqqZj6mHFUMvXtOJt1uoUx09pFW6011inTMxqI8BA8PM95myrIyyKwdnzjdFjLiE6KBPVtJIg==
-  /st-scraper/1.2.7:
+  /st-scraper/1.3.0:
     dependencies:
       cheerio: 0.22.0
       request: 2.88.0
       valid-url: 1.0.9
     dev: false
     resolution:
-      integrity: sha512-ratNFGme0WgHp3dP8vlZIfGvugMJchkG1EMyHexSnOjjOVN+8VP1gHgSPeiJtUZqx1Xoj+jZzxCQX7fiUeoArw==
+      integrity: sha512-0ntv5CKp14B84K/PN8UuFlK8MBV4weYDmX2w15rSH35eNUP4SyvJZOC4Z7vm0If2g5np6zSkjX+b10FNXBKEUw==
   /statuses/1.5.0:
     dev: false
     engines:
@@ -944,7 +960,7 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==
-  /uglify-js/3.7.2:
+  /uglify-js/3.7.4:
     dependencies:
       commander: 2.20.3
       source-map: 0.6.1
@@ -953,7 +969,7 @@ packages:
       node: '>=0.8.0'
     hasBin: true
     resolution:
-      integrity: sha512-uhRwZcANNWVLrxLfNFEdltoPNhECUR3lc+UdJoG9CBpMcSnKyWA94tc3eAujB1GcMY5Uwq8ZMp4qWpxWYDQmaA==
+      integrity: sha512-tinYWE8X1QfCHxS1lBS8yiDekyhSXOO6R66yNOCdUJeojxxw+PX2BHAz/BWyW7PQ7pkiWVxJfIEbiDxyLWvUGg==
   /unpipe/1.0.0:
     dev: false
     engines:
@@ -1023,11 +1039,12 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
+  cna-scraper: ^1.0.2
   discord.js: ^11.5.1
   express: ^4.17.1
-  nric: ^1.1.7
+  nric: ^1.1.9
   request: ^2.88.0
-  sg-haze: ^1.0.5
+  sg-haze: ^1.0.6
   sg-hazometer: ^1.0.1
-  st-scraper: ^1.2.7
-  uglify-js: ^3.7.2
+  st-scraper: ^1.3.0
+  uglify-js: ^3.7.4
