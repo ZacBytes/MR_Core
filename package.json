@@ -8,7 +8,7 @@
   },
   "version": "1.0.1",
   "dependencies": {
-    "uglify-js": "^3.8",
+    "uglify-js": "^2.6",
     "discord.js": "^12.2.0",
     "express": "^4.17.1",
     "sg-hazometer": "^1.0.1",
