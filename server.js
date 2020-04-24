@@ -22,9 +22,8 @@ const stscrape = require('st-scraper');
 const cnascraper = require('cna-scraper');
 
 const activities = ["with mixer","with lights","with mics","with condensers"];
-const owner = client.users.find(user => user.username == "ZacBytes")
 
-const wrongchannelembed = new Discord.RichEmbed()
+const wrongchannelembed = new Discord.MessageEmbed()
 .setTitle("Error")
 .setColor(`#EF5858`)
 .setDescription("Use <#594741385521790986> for bot commands!")
@@ -41,7 +40,7 @@ client.on('ready', () => {
 client.on('guildMemberAdd', member => {
     member.send("Welcome to the official MR Discord! Please change your server nickname to your real name and we will grant you access to the server momentarily."); 
     var general = client.channels.get("594164045452541952")
-    const joinembed = new Discord.RichEmbed()
+    const joinembed = new Discord.MessageEmbed()
    .setTitle(`${member.displayName} has joined the server!`)
    .setColor(`#FFCD42`)
    .setTimestamp();
@@ -55,8 +54,8 @@ let lowercase = msg.content.toLowerCase()
 
 //help  
     if (lowercase.startsWith(".help")) {
-    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
-    const helpembed = new Discord.RichEmbed()
+    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete({ timeout: 4000 }),botmsg.delete({ timeout: 4000 })});
+    const helpembed = new Discord.MessageEmbed()
    .setTitle("Bot Usage")
    .setColor(`#0A102A`)
    .addField(".ping", "Sends bot's latency", false)
@@ -77,7 +76,7 @@ let lowercase = msg.content.toLowerCase()
 //ping  
     if (lowercase.startsWith(".ping")) {
     if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
-    const pingembed = new Discord.RichEmbed()
+    const pingembed = new Discord.MessageEmbed()
    .setTitle("Ping")
    .setColor(`#FFCD43`)
    .setDescription((new Date().getTime() - msg.createdTimestamp) + "ms")
@@ -89,7 +88,7 @@ let lowercase = msg.content.toLowerCase()
 //github  
     if (lowercase.startsWith(".github")) {
     if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
-    const githubembed = new Discord.RichEmbed()
+    const githubembed = new Discord.MessageEmbed()
    .setTitle("Github Source")
    .setColor(`#FFCD43`)
    .setDescription("https://github.com/ZacBytes/MR_Core")
@@ -100,7 +99,7 @@ let lowercase = msg.content.toLowerCase()
 //nric generate  
     if (lowercase.startsWith(".nric generate")) {
     if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
-    const nricembed = new Discord.RichEmbed()
+    const nricembed = new Discord.MessageEmbed()
    .setTitle("NRIC Generated")
    .setColor(`#4B8BF4`)
    .setDescription(nric.generateNRIC())
@@ -113,7 +112,7 @@ let lowercase = msg.content.toLowerCase()
     if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
     var number = msg.content.slice(14).trim()
     
-    const nricembed = new Discord.RichEmbed()
+    const nricembed = new Discord.MessageEmbed()
    .setTitle("NRIC Validation")
    .setColor(`#4B8BF4`)
    .setDescription(nric.validate(number))
@@ -127,7 +126,7 @@ let lowercase = msg.content.toLowerCase()
     var url = msg.content.slice(10).trim()
     
     stscrape.ScrapeArticle(url, function(err, ArticleData){
-      const articleembed = new Discord.RichEmbed()
+      const articleembed = new Discord.MessageEmbed()
      .setTitle(ArticleData.title)
      .addField(`**Img Caption**: ${ArticleData.imgcaption.substring(0,230)}`)
      .setDescription(`**Text Preview**: ${ArticleData.text.substring(0,230)}`)
@@ -144,7 +143,7 @@ let lowercase = msg.content.toLowerCase()
     var url = msg.content.slice(12).trim()
     
     cnascraper.ScrapeArticle(url, function(err, ArticleData){
-      const articleembed = new Discord.RichEmbed()
+      const articleembed = new Discord.MessageEmbed()
      .setTitle(ArticleData.title)
      .addField(`**Img Caption**: ${ArticleData.imgcaption.substring(0,230)}`)
      .setDescription(`**Text Preview**: ${ArticleData.text.substring(0,230)}`)
@@ -161,7 +160,7 @@ let lowercase = msg.content.toLowerCase()
       
     sghaze.getPSI(function(err, PSIData){
     
-    const hazeembed = new Discord.RichEmbed()
+    const hazeembed = new Discord.MessageEmbed()
    .setTitle("Singapore PSI 24-Hourly")
    .setColor(`#4B8BF4`)
    .setDescription(`Air Quality: **${PSIData.HealthStatus}**`)
@@ -187,7 +186,7 @@ let lowercase = msg.content.toLowerCase()
     let uvi = body["items"][0]["index"][0]["value"]
     let status = body["api_info"]["status"]
     
-    const uviembed = new Discord.RichEmbed()
+    const uviembed = new Discord.MessageEmbed()
    .setTitle("Singapore UV Index")
    .setColor(`#1ED760`)
    .setDescription(`API Status: **${status}**`)
@@ -205,7 +204,7 @@ let lowercase = msg.content.toLowerCase()
       return (Math.floor(Math.random() * 2) == 0) ? 'Heads' : 'Tails';
     }
     
-    const coinembed = new Discord.RichEmbed()
+    const coinembed = new Discord.MessageEmbed()
    .setTitle("Coin Flip")
    .setColor(`#79E6D9`)
    .setDescription(`Landed **${coinFlip()}**!`);
@@ -256,7 +255,7 @@ if (msg.content.startsWith(".eval")) {
     var text = msg.content.slice(10 + chnlid.length + 3)
     var newtext1 = text.replace("<everyone>","@everyone")
     var newtext2 = newtext1.replace("<here>","@here")
-    const announcementembed = new Discord.RichEmbed()
+    const announcementembed = new Discord.MessageEmbed()
    .setTitle("Announcement")
    .setAuthor(msg.guild.members.get(msg.author.id).displayName, msg.author.avatarURL)
    .setColor(`#4B8BF4`)
@@ -268,7 +267,7 @@ if (msg.content.startsWith(".eval")) {
 //manuals
     if (lowercase.startsWith(".manual e2")) {
     if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
-    const e2embed = new Discord.RichEmbed()
+    const e2embed = new Discord.MessageEmbed()
    .setTitle("Element 2 Manual")
    .setColor(`#FFCD43`)
    .setDescription("https://www.etcconnect.com/WorkArea/DownloadAsset.aspx?id=10737497091")
@@ -279,7 +278,7 @@ if (msg.content.startsWith(".eval")) {
   
     if (lowercase.startsWith(".manual cs")) {
     if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
-    const csembed = new Discord.RichEmbed()
+    const csembed = new Discord.MessageEmbed()
    .setTitle("ColorSource Manual")
    .setColor(`#FFCD43`)
    .setDescription("https://www.etcconnect.com/WorkArea/DownloadAsset.aspx?id=10737498609")
@@ -290,7 +289,7 @@ if (msg.content.startsWith(".eval")) {
   
     if (lowercase.startsWith(".manual jester")) {
     if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
-    const jesterembed = new Discord.RichEmbed()
+    const jesterembed = new Discord.MessageEmbed()
    .setTitle("Jester Manual")
    .setColor(`#FFCD43`)
    .setDescription("https://zero88.com/manuals/7340300_jestermanual_3_4.pdf")
@@ -301,7 +300,7 @@ if (msg.content.startsWith(".eval")) {
   
     if (lowercase.startsWith(".manual m7cl")) {
     if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
-    const m7clembed = new Discord.RichEmbed()
+    const m7clembed = new Discord.MessageEmbed()
    .setTitle("Yamaha M7CL Manual")
    .setColor(`#FFCD43`)
    .setDescription("https://sg.yamaha.com/files/download/other_assets/7/323187/m7clv3_en_om_i0.pdf")
