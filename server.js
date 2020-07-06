@@ -60,7 +60,6 @@ let lowercase = msg.content.toLowerCase()
    .setColor(`#0A102A`)
    .addField(".ping", "Sends bot's latency", false)
    .addField(".github", "Provides source code for bot",false)
-   .addField(".announce {#channel} {text}", "Posts announcement text to the channel mentioned. Use **<everyone>** or **<here>** to convert",false) 
    .addField(".manual {name}", "Equipment manuals. Names: **E2, CS, M7CL, JESTER**",false)
    .addField(".coinflip", "Flips a coin for you",false)
    .addField(".nric {generate/validate}", "Generates/Validates an NRIC no.",false)
@@ -244,26 +243,6 @@ if (msg.content.startsWith(".eval")) {
   }
 }
   
-//announce  
-    if (lowercase.startsWith(".announce")) {
-    if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
-    const args = msg.content.slice(9).trim().split(/ +/g)
-    var chnlid = args[0].slice(2).replace(">","").trim()
-    if (!chnlid || !msg.member.hasPermission('ADMINISTRATOR')) return;
-    console.log(chnlid)
-    var annchannel = client.channels.get(chnlid);
-    var text = msg.content.slice(10 + chnlid.length + 3)
-    var newtext1 = text.replace("<everyone>","@everyone")
-    var newtext2 = newtext1.replace("<here>","@here")
-    const announcementembed = new Discord.MessageEmbed()
-   .setTitle("Announcement")
-   .setAuthor(msg.guild.members.get(msg.author.id).displayName, msg.author.avatarURL)
-   .setColor(`#4B8BF4`)
-   .setDescription(newtext2)
-   .setTimestamp();
-    annchannel.send(announcementembed)
-    }
-  
 //manuals
     if (lowercase.startsWith(".manual e2")) {
     if (msg.channel.id != 594741385521790986) return msg.channel.send(wrongchannelembed).then(botmsg => {msg.delete(4000),botmsg.delete(4000)});
@@ -323,7 +302,7 @@ if (msg.content.startsWith(".eval")) {
       msg.react(client.emojis.get("598144351029166080"));
     }
   
-    if (lowercase.includes("mr ") || lowercase.includes(" mr") || lowercase.includes("gold class cca")) {
+    if (lowercase.includes("mr") || lowercase.includes("gold class cca") || lowercase.includes("media resource")) {
       msg.react(client.emojis.get("595106822034030592"));
     }
 
